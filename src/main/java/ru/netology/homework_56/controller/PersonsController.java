@@ -22,6 +22,6 @@ public class PersonsController {
 
     @GetMapping("/by-city")
     public ResponseEntity<List<Person>> getPersonsByCity(@RequestParam String city) {
-        return new ResponseEntity<>(repo.getPersonsByCity(city), HttpStatus.OK);
+        return new ResponseEntity<>(repo.getPersonByCityOfLiving(city), HttpStatus.OK);
     }
 }
