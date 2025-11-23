@@ -10,6 +10,7 @@ import ru.netology.homework_56.model.Person;
 import ru.netology.homework_56.repository.PersonsRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/persons")
@@ -23,5 +24,15 @@ public class PersonsController {
     @GetMapping("/by-city")
     public ResponseEntity<List<Person>> getPersonsByCity(@RequestParam String city) {
         return new ResponseEntity<>(repo.getPersonByCityOfLiving(city), HttpStatus.OK);
+    }
+
+    @GetMapping("/by-age")
+    public ResponseEntity<List<Person>> getPersonsByAge(@RequestParam short age) {
+        return new ResponseEntity<>(repo.getPersonByAgeLessThan(age), HttpStatus.OK);
+    }
+
+    @GetMapping("/by-name-surname")
+    public ResponseEntity<Optional<Person>> getPersonsByNameSurname(@RequestParam String name, @RequestParam String surname) {
+        return new ResponseEntity<>(repo.getPersonByNameAndSurname(name, surname), HttpStatus.OK);
     }
 }
