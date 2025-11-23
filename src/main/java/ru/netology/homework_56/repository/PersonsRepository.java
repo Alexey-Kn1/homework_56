@@ -1,5 +1,6 @@
 package ru.netology.homework_56.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import ru.netology.homework_56.model.Person;
@@ -9,9 +10,12 @@ import java.util.Optional;
 
 @Repository
 public interface PersonsRepository extends CrudRepository<Person, Long> {
-    List<Person> getPersonByCityOfLiving(String cityOfLiving);
+    @Query("select p from Person p where p.cityOfLiving = :cityOfLiving")
+    List<Person> getPersonsByCity(String cityOfLiving);
 
-    List<Person> getPersonByAgeLessThan(short age);
+    @Query("select p from Person p where p.age < :age")
+    List<Person> getPersonsYoungerThan(short age);
 
-    Optional<Person> getPersonByNameAndSurname(String name, String surname);
+    @Query("select p from Person p where p.name = :name and p.surname = :surname")
+    Optional<Person> searchPersons(String name, String surname);
 }

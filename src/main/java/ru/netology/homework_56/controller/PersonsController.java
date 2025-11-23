@@ -23,16 +23,16 @@ public class PersonsController {
 
     @GetMapping("/by-city")
     public ResponseEntity<List<Person>> getPersonsByCity(@RequestParam String city) {
-        return new ResponseEntity<>(repo.getPersonByCityOfLiving(city), HttpStatus.OK);
+        return new ResponseEntity<>(repo.getPersonsByCity(city), HttpStatus.OK);
     }
 
     @GetMapping("/by-age")
     public ResponseEntity<List<Person>> getPersonsByAge(@RequestParam short age) {
-        return new ResponseEntity<>(repo.getPersonByAgeLessThan(age), HttpStatus.OK);
+        return new ResponseEntity<>(repo.getPersonsYoungerThan(age), HttpStatus.OK);
     }
 
     @GetMapping("/by-name-surname")
     public ResponseEntity<Optional<Person>> getPersonsByNameSurname(@RequestParam String name, @RequestParam String surname) {
-        return new ResponseEntity<>(repo.getPersonByNameAndSurname(name, surname), HttpStatus.OK);
+        return new ResponseEntity<>(repo.searchPersons(name, surname), HttpStatus.OK);
     }
 }
